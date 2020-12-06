@@ -15,7 +15,9 @@ const char* password = "if";
  * karma path: data -> total_karma
  */
 
-const String url = "https://www.reddit.com/user/motixor/about.json";
+const String BASE_URL = "https://www.reddit.com/user/";
+String url;
+String username;
 
 HTTPClient http;
 int httpCode;
@@ -23,6 +25,14 @@ int httpCode;
 void setup() {
 
   Serial.begin(115200);
+
+  delay(1000);
+  Serial.println("What is the username?");
+
+  while (!Serial.available()) {}
+  username = Serial.readStringUntil('\n');
+  url = BASE_URL + username +"/about.json";
+  
   lcd.begin(16, 2);
   WiFi.begin(ssid, password);
 
@@ -31,12 +41,12 @@ void setup() {
     Serial.println("Still connecting...");
   }
 
-  
   Serial.println("Connected");
+  Serial.println(url);
 }
 
 void loop() {
-
+  
   lcd.clear();
   
   http.begin(url, "DB:E9:D5:FE:EB:EF:68:34:55:FD:62:BA:C9:BB:04:D4:E3:22:18:81");
@@ -73,4 +83,4 @@ void loop() {
   }
 
   delay(120000);
-}
+ }
