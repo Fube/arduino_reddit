@@ -72,5 +72,5 @@ void loop() {
     Serial.println("There was an error GETting the specified URL");
   }
 
-  delay(10000);
+  delay(120000);
 }
